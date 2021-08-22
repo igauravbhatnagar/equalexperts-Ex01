@@ -1,12 +1,7 @@
 package org.example
 
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions.udf
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.TimestampType
-
-import java.util.Date
 
 object UserDefinedFunctions extends Serializable {
 
