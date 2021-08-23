@@ -20,26 +20,4 @@ object UserDefinedFunctions extends Serializable {
     }
   }
 
-  var totalSessionDuration:Long = 0
-  def sessionDuration = udf((ts1: Timestamp, ts2: Timestamp) => {
-    if (ts2 == null) {
-      totalSessionDuration = 0
-      0
-    }
-    else {
-      val sessionDifferenceInMinutes:Long = (ts1 - ts2)/60
-      totalSessionDuration = totalSessionDuration + sessionDifferenceInMinutes
-      if (totalSessionDuration > 120) 0 else (ts1 - ts2)/60
-    }
-  })
-
-  var sess_id_suffix = 0 //assignSessionId -Clojure
-
-  def assignSessionId = udf((dur_mins: Int) => {
-    if (dur_mins == 0 && sess_id_suffix == 0) sess_id_suffix = 1                      //for first session of the users
-    else if (dur_mins == 0 && sess_id_suffix > 0) sess_id_suffix += 1
-    else if (dur_mins > 30) sess_id_suffix += 1
-//    else if (dur_mins > 120) sess_id_suffix += 1
-    "Session" + sess_id_suffix
-  })
 }
